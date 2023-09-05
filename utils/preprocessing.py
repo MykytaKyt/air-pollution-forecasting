@@ -15,15 +15,30 @@ def remove_outliers(df):
 
 
 def preprocess_data(df):
-    imputer = SimpleImputer(strategy='mean')
-    df[['temperature', 'humidity', 'dust_10_0', 'dust_2_5', 'no2', 'co', 'nh3']] = imputer.fit_transform(
-        df[['temperature', 'humidity', 'dust_10_0', 'dust_2_5', 'no2', 'co', 'nh3']])
     df['Time'] = pd.to_datetime(df['Time'])
     df = df.set_index(pd.DatetimeIndex(df['Time']))
     df = df.between_time('0:00', '23:59').resample('60T').mean()
-    df[['temperature', 'humidity', 'dust_10_0', 'dust_2_5', 'no2', 'co', 'nh3']] = imputer.fit_transform(
-        df[['temperature', 'humidity', 'dust_10_0', 'dust_2_5', 'no2', 'co', 'nh3']])
-    return df
+
+    columns_to_impute = ['temperature', 'humidity', 'dust_10_0', 'dust_2_5', 'no2', 'co', 'nh3']
+
+    imp = SimpleImputer(strategy='mean')
+    df[columns_to_impute] = imp.fit_transform(df[columns_to_impute])
+
+
+    train = df.query('Time < "2020-02-15"')
+    valid = df.query('Time >= "2020-02-15" and Time < "2020-03-15"')
+    test = df.query('Time >= "2020-03-15"')
+
+    train = train.drop(columns=['Time'])
+    valid = valid.drop(columns=['Time'])
+    test = test.drop(columns=['Time'])
+
+    scaler = MinMaxScaler(feature_range=(0, 1))
+    train_scaled = scaler.fit_transform(train)
+    valid_scaled = scaler.transform(valid)
+    test_scaled = scaler.transform(test)
+
+    return train_scaled, valid_scaled, test_scaled
 
 
 if __name__ == "__main__":

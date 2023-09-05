@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 def save_results(model, history, experiment_name=None):
     experiment_dir = create_experiment_directory(experiment_name)
-    model.save(os.path.join(experiment_dir, 'trained_model.h5'))
+    model.save(os.path.join(experiment_dir, 'trained_model.keras'))
     save_loss_accuracy_plots(history, experiment_dir)
 
 

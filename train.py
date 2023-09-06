@@ -7,9 +7,7 @@ from utils.preprocessing import load_data, remove_outliers, preprocess_data
 from utils.model import create_simple_lstm_model
 from utils.utils import save_results
 
-# Fixed target columns
-TARGET_COLUMNS = ['temperature', 'humidity', 'dust_10_0', 'dust_2_5', 'no2', 'co', 'nh3']
-# Define the lag
+
 N_LAG = 168
 
 

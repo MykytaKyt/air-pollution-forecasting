@@ -42,8 +42,8 @@ def main(data_file, model_file, evaluate_metrics, output_predictions, output_fil
 def evaluate_model(model, test_data):
     click.secho("Evaluating Model", fg='green', bold=True)
     test_loss = model.evaluate(test_data, verbose=0)
-    test_mae = test_loss[0]
-    click.secho(f"Test Loss (MAE): {test_mae:.4f}", fg='green', bold=True)
+    click.secho(f"Test Loss (MAE): {test_loss[0]:.4f}", fg='green', bold=True)
+    click.secho(f"Test Accuracy: {test_loss[1] * 100:.2f}%", fg='green', bold=True)
 
 COLUMNS = ['temperature', 'humidity', 'dust_10_0', 'dust_2_5', 'no2', 'co', 'nh3']
 

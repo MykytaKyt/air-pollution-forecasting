@@ -1,44 +1,46 @@
-# Air Pollution Forecasting
+# Air Pollution Forecasting Project
 
 ## Table of Contents
 
-- [Project Description](#project-description)
-- [Purpose](#purpose)
+- [Project Overview](#project-overview)
+- [Project Purpose](#project-purpose)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-- [Downloading Data](#downloading-data)
-- [Training the Model](#training-the-model)
-- [Evaluating the Model](#evaluating-the-model)
+- [Data Download](#data-download)
+- [Data Preparation](#data-preparation)
+- [Model Training](#model-training)
+- [Model Evaluation](#model-evaluation)
+- [Training Results](#training-results)
 
-## Project Description
+## Project Overview
 
-This project focuses on air pollution forecasting using machine learning techniques. The primary goal is to build a predictive model that can forecast air pollution levels based on historical data. Accurate air pollution forecasting is essential for public health and environmental monitoring, enabling timely interventions and policy decisions.
+Welcome to the Air Pollution Forecasting project, where we harness the power of machine learning to predict air pollution levels. This project focuses on building a predictive model that utilizes historical data to forecast air pollution, a critical aspect of public health and environmental monitoring.
 
-## Purpose
+## Project Purpose
 
-The purpose of this project is to develop a machine learning model capable of predicting air pollution levels. Air pollution has significant health and environmental impacts, and accurate forecasting can help mitigate these effects. The model can be used for real-time monitoring, early warnings, and policy decision support.
+The purpose of this project is to develop a robust machine learning model capable of predicting air pollution levels. Given the significant health and environmental impacts of air pollution, accurate forecasting plays a pivotal role in mitigating these effects. The model is designed for real-time monitoring, early warnings, and aiding policy decisions.
 
 ## Getting Started
 
-Follow the steps below to get started with this project.
+Let's dive into the project. Follow these steps to get started:
 
 ### Prerequisites
 
-Before using this project, ensure you have the following prerequisites:
+Before we begin, ensure you have the following prerequisites in place:
 
 - Python (version 3.9 or later)
 - Virtual environment (optional but recommended)
 - `make` utility (optional but recommended)
 
-Also make sure that you installed CUDA toolkit and its corresponding cuDNN file to work with GPU. Use Nvidia instructions to install it on your platform.
+If you plan to use GPU acceleration, make sure you've installed the CUDA toolkit and the corresponding cuDNN file for your platform following Nvidia's instructions.
 
 ### Installation
 
 1. Clone the repository to your local machine:
 
    ```bash
-   git@github.com:MykytaKyt/air-pollution-forecasting.git
+   git clone git@github.com:MykytaKyt/air-pollution-forecasting.git
    cd air-pollution-forecasting
    ```
 
@@ -55,40 +57,65 @@ Also make sure that you installed CUDA toolkit and its corresponding cuDNN file 
    pip install -r requirements.txt
    ```
 
-## Downloading Data
+## Data Download
 
-Dataset you need download from [gdrive](https://drive.google.com/file/d/1JoIQPZCGRcvvtUiVs20g_wA8JVH312nC/view?usp=drive_link) and unpack folder data to root of project.
+To begin, download the dataset from [Google Drive](https://drive.google.com/file/d/1JoIQPZCGRcvvtUiVs20g_wA8JVH312nC/view?usp=drive_link) and extract the contents to the project's root folder. You can also access more recent data from the [Save Eco Bot Station 15705](https://www.saveecobot.com/en/station/15705) website, following their provided instructions.
 
-The project data taken from the [Save Eco Bot Station 15705](https://www.saveecobot.com/en/station/15705) website. Follow the instructions provided on the website to access and download the data if you want more recent data.
+You can download the trained model from this link: [Trained Model](https://drive.google.com/file/d/1NWVSwvM3shwlCTTtq3E5R6kvtkHkZnZv/view?usp=drive_link)
 
-## Prepare the Data
+## Data Preparation
 
-To preprocess data for training and evaluation, use the make process command. This command will execute the data preprocessing steps defined in the process.py script.
+To preprocess the data for training and evaluation, use the following command:
 
 ```bash
 make process
 ```
-The process.py script is responsible for data preprocessing and preparing the dataset for training the machine learning model.
 
-## Training the Model
+This command runs the `process.py` script, which handles data preprocessing and prepares the dataset for training the machine learning model.
 
-To train the machine learning model for air pollution forecasting, use the `train.py` script. This script handles data preprocessing, model training, and saving the trained model.
+## Model Training
+
+Train the machine learning model for air pollution forecasting using the `train.py` script. This script handles data preprocessing, model training, and saving the trained model. Customize training options such as epochs, batch size, and early stopping patience as needed for your specific use case.
 
 ```bash
 make train
 ```
 
-The training script accepts various options, such as the number of training epochs, batch size, and early stopping patience. Adjust these options as needed for your specific use case.
+## Model Evaluation
 
-## Evaluating the Model
-
-To evaluate the trained model's performance, use the `eval.py` script. This script loads the trained model and performs evaluation on a test dataset.
+Evaluate the performance of the trained model using the `eval.py` script. This script loads the trained model and performs evaluation on a test dataset.
 
 ```bash
 make eval
 ```
 
-The evaluation script provides insights into the model's accuracy and its ability to forecast air pollution levels. It reports metrics such as Mean Absolute Error (MAE) and accuracy, helping you assess the model's effectiveness.
+The evaluation script provides insights into the model's accuracy and its ability to forecast air pollution levels. It reports metrics such as Mean Absolute Error (MAE) and accuracy to help assess the model's effectiveness.
 
+## Training Results
 
-## Results 
+### Performance Metrics
+
+- **Final Training Accuracy:** 89.77%
+- **Final Test Accuracy:** 88.95%
+- **Final Training Loss:** 0.0132
+- **Final Test Loss:** 0.0191
+
+### Training Accuracy
+
+![Training Accuracy Plot](images/accuracy_plot.png)
+
+The training accuracy plot demonstrates the model's learning progress over epochs, showing a steady increase in accuracy.
+
+### Training Loss
+
+![Training Loss Plot](images/loss_plot.png)
+
+The training loss plot depicts the model's loss reduction during training, indicating effective error minimization.
+
+## Summary
+
+In summary, this project successfully develops an air pollution forecasting model:
+
+- The training accuracy consistently improves, demonstrating the model's learning ability.
+- The training loss consistently decreases, indicating effective optimization.
+- These results affirm the successful training of our air pollution forecasting model, which holds promise for public health and environmental applications.

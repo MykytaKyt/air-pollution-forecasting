@@ -47,11 +47,3 @@ Explain how to evaluate the trained model using the `eval.py` script. Describe t
 ```bash
 make eval
 ```
-
-## Running the Gradio Demo
-
-Explain how to run the Gradio demo for your model using the `gradio_demo.py` script. Provide instructions for accessing the demo in a web browser.
-
-```bash
-make demo
-```

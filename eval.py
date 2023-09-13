@@ -8,7 +8,7 @@ from utils.utils import load_data
 N_LAG = 168
 
 @click.command()
-@click.option('--data-file', default='data/sensors-230-pollution.csv', help='Path to the data file.')
+@click.option('--data-file', default='data/test.parquet', help='Path to the data file.')
 @click.option('--model-file', default='models/trained_model.h5', help='Path to the trained model file.')
 @click.option('--evaluate-metrics', is_flag=True, help='Calculate evaluation metrics.')
 @click.option('--output-predictions', is_flag=True, help='Output model predictions to CSV.')

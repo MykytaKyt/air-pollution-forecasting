@@ -2,7 +2,6 @@ import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, LSTM, SimpleRNN, Dropout
 
-
 def create_simple_rnn_model(input_shape):
     model = Sequential()
     model.add(SimpleRNN(128, input_shape=input_shape))

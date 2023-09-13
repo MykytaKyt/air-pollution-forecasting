@@ -1,6 +1,20 @@
 import os
 import datetime
+import pandas as pd
 import matplotlib.pyplot as plt
+
+def load_data(csv_file):
+    df = pd.read_parquet(csv_file)
+    return df
+
+
+def train_test_split(df, train_percentage):
+    total_rows = len(df)
+    train_rows = int(train_percentage * total_rows)
+
+    train = df.iloc[:train_rows]
+    valid = df.iloc[train_rows:]
+    return train, valid
 
 
 def save_results(model, history, experiment_name=None):

@@ -3,9 +3,7 @@ from tensorflow.keras.models import load_model
 from train import create_timeseries_generator
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
-from sklearn.impute import SimpleImputer
-
-from utils.preprocessing import load_data
+from utils.utils import load_data
 
 N_LAG = 168
 
@@ -17,16 +15,12 @@ N_LAG = 168
 @click.option('--output-file', default='predictions.csv', help='Path to the output CSV file for predictions.')
 def main(data_file, model_file, evaluate_metrics, output_predictions, output_file):
     click.secho("Loading and Preprocessing Data", fg='blue', bold=True)
-    df = load_data(data_file)
-    df = df.set_index(pd.DatetimeIndex(df['Time']))
-    df = df.between_time('0:00', '23:59').resample('60T').mean()
-    columns_to_impute = ['temperature', 'humidity', 'dust_10_0', 'dust_2_5', 'no2', 'co', 'nh3']
-    imp = SimpleImputer(strategy='mean')
-    df[columns_to_impute] = imp.fit_transform(df[columns_to_impute])
-    test = df.drop(columns=['Time'])
 
-    scaler = MinMaxScaler(feature_range=(0, 1))
+    test = load_data(data_file)
+
+    scaler = MinMaxScaler()
     test_data_scaled = scaler.fit_transform(test)
+
     test_data_gen = create_timeseries_generator(test_data_scaled, test_data_scaled, batch_size=1)
 
     click.secho("Loading Trained Model", fg='blue', bold=True)
@@ -45,7 +39,7 @@ def evaluate_model(model, test_data):
     click.secho(f"Test Loss (MAE): {test_loss[0]:.4f}", fg='green', bold=True)
     click.secho(f"Test Accuracy: {test_loss[1] * 100:.2f}%", fg='green', bold=True)
 
-COLUMNS = ['temperature', 'humidity', 'dust_10_0', 'dust_2_5', 'no2', 'co', 'nh3']
+COLUMNS = ['heca_humidity', 'heca_temperature', 'pm10', 'pm25', 'pressure_pa']
 
 
 def generate_predictions(model, test_data, output_file, scaler):

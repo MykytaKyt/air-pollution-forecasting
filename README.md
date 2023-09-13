@@ -55,35 +55,3 @@ Explain how to run the Gradio demo for your model using the `gradio_demo.py` scr
 ```bash
 make demo
 ```
-
-## Usage Examples
-
-Provide usage examples and code snippets to demonstrate how users can interact with your project, make predictions, or integrate it into their own applications.
-
-```python
-# Example code to use the trained model
-import gradio as gr
-
-# Create an interface for making predictions
-iface = gr.Interface.load("gradio_demo.py")
-
-# Input sample data and get predictions
-result = iface.process([sample_data])
-
-# Display the prediction result
-print(result)
-```
-
-## Contributing
-
-Explain how others can contribute to your project, whether it's through bug fixes, feature additions, or documentation improvements. Include guidelines for submitting contributions.
-
-## License
-
-Specify the license under which your project is distributed.
-
-## Acknowledgments
-
-Give credit to any third-party libraries, tools, or resources that you used in your project. You can also acknowledge contributors or sources of inspiration here.
-
-Feel free to customize this README template with specific details about your project. Providing clear and comprehensive instructions will help users understand how to use your project effectively.

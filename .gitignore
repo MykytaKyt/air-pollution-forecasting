@@ -276,3 +276,4 @@ pyrightconfig.json
 # End of https://www.toptal.com/developers/gitignore/api/python,jupyternotebooks,pycharm+all
 /notebooks/.ipynb_checkpoints/
 /predictions.csv
+/data/

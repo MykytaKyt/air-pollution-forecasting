@@ -1,6 +1,6 @@
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, LSTM, SimpleRNN
+from tensorflow.keras.layers import Dense, LSTM, SimpleRNN, Dropout
 
 
 def create_simple_rnn_model(input_shape):
@@ -14,7 +14,7 @@ def create_simple_rnn_model(input_shape):
 def create_simple_lstm_model(input_shape):
     model = Sequential()
     model.add(LSTM(128, input_shape=input_shape))
-    model.add(Dense(7))
+    model.add(Dense(5))
     model.compile(loss='mae', optimizer=tf.keras.optimizers.RMSprop(), metrics=['accuracy'])
     return model
 
@@ -22,8 +22,11 @@ def create_simple_lstm_model(input_shape):
 def create_stacked_lstm_model(input_shape):
     model = Sequential()
     model.add(LSTM(4, input_shape=input_shape, return_sequences=True))
+    model.add(Dropout(0.2))
     model.add(LSTM(16, return_sequences=True))
+    model.add(Dropout(0.2))
     model.add(LSTM(32))
+    model.add(Dropout(0.2))
     model.add(Dense(7))
     model.compile(loss='mae', optimizer=tf.keras.optimizers.RMSprop(), metrics=['accuracy'])
     return model
